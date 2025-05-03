@@ -3,20 +3,36 @@ package com.boriskoba.eventreader.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
+import java.time.*;
+
+import com.boriskoba.eventreader.dto.ProductDto;
 
 @Entity
 @Data
 public class Product {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    @GeneratedValue
+    private Long id;
+
     private String type;
-    private double price;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "event_id")
+    private BigDecimal price;
+    private String startDate;
+    private String endDate;
+    @ManyToOne
     private Event event;
+
+    public static Product fromDto(ProductDto dto, Event event) {
+        Product product = new Product();
+        product.setType(dto.getType());
+        product.setPrice(dto.getPrice());
+        product.setStartDate(dto.getStartDate());
+        product.setEndDate(dto.getEndDate());
+        product.setEvent(event);
+        return product;
+    }
+
+    public ProductDto toDto() {
+        return new ProductDto(type, price, startDate, endDate);
+    }
 }
