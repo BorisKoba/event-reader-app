@@ -5,7 +5,6 @@ import com.boriskoba.eventreader.dto.*;
 import com.boriskoba.eventreader.entity.*;
 import com.boriskoba.eventreader.parser.XmlParser;
 import com.boriskoba.eventreader.repository.*;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -55,7 +54,7 @@ public class EventServiceImpl implements EventService {
         }
         Path targetPath = backupFolder.resolve(filePath.getFileName());
         Files.move(filePath, targetPath, StandardCopyOption.REPLACE_EXISTING);
-    }
+    } 
 
     @Override
     public Map<String, List<ProductDto>> getProductsGroupedBySourceCompany(String insuredId) {

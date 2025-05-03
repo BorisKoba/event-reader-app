@@ -1,0 +1,22 @@
+<root>
+    <requestDetails>
+        <id>id</id>
+        <requestDate>2024-05-02 12:00:00</requestDate>
+        <sourceCompany>Company</sourceCompany>
+    </requestDetails>
+    <events>
+        <event>
+            <eventId>eventId</eventId>
+            <type>type</type>
+            <insuredId>insuredId</insuredId>
+            <products>
+                <product>
+                    <policyNumber>policy</policyNumber>
+                    <premium>1000</premium>
+                    <startDate>2024-05-01</startDate>
+                    <endDate>2025-05-01</endDate>
+                </product>
+            </products>
+        </event>
+    </events>
+</root>

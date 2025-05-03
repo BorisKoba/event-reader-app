@@ -1,27 +1,29 @@
 package com.boriskoba.eventreader.parser;
 
 import com.boriskoba.eventreader.dto.RootDto;
-import org.junit.jupiter.api.*;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
+import jakarta.xml.bind.JAXBException;
 
-import java.nio.file.*;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class XmlParserTest {
-	private XmlParser xmlParser;
 
-	@BeforeEach
-	void setUp() {
-		xmlParser = new XmlParser();
-	}
+    private final XmlParser xmlParser = new XmlParser();
 
-	@Test
-	void testParse_ValidXmlFile_ReturnsRootDto() throws Exception {
-		Path xmlFilePath = Paths.get(getClass().getClassLoader().getResource("test-xml-content.xml").toURI());
-		RootDto rootDto = xmlParser.parse(xmlFilePath);
-		assertNotNull(rootDto);
-		assertEquals("123", rootDto.getRequestDetails().getId());
-	}
+    @Test
+    void testParse_ValidXmlFile_ReturnsRootDto() throws JAXBException, URISyntaxException {
+        Path xmlPath = Paths.get(
+                getClass().getClassLoader().getResource("test-event.xml").toURI()
+        );
+
+        RootDto rootDto = xmlParser.parse(xmlPath);
+
+        assertNotNull(rootDto);
+        assertNotNull(rootDto.getRequestDetails());
+        assertEquals("Company", rootDto.getRequestDetails().getSourceCompany());
+    }
 }

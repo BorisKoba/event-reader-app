@@ -1,12 +1,12 @@
 package com.boriskoba.eventreader.service;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
-
 import com.boriskoba.eventreader.dto.ProductDto;
 
+import java.util.*;
+
 public interface EventService {
-    void processFile(Path filePath);
+
+    void processFile(java.nio.file.Path filePath);
+
     Map<String, List<ProductDto>> getProductsGroupedBySourceCompany(String insuredId);
 }
